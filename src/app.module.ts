@@ -1,19 +1,29 @@
 import { Module } from '@nestjs/common';
-
-import {TypeOrmModule} from '@nestjs/typeorm';
-import {typeOrmConfig} from './configs/typeorm.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeOrmConfig } from './configs/typeorm.config';
 import { UsersModule } from './users/users.module';
-// import { UserRepository } from './users/users.repository';
 import { AuthModule } from './auth/auth.module';
+import { LoggerInterceptor } from './interceptors/logger.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { WinstonModule } from 'nest-winston';
+import { winstonConfig } from './configs/winston.config';
+import { ProductsModule } from './products/products.module';
+
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig), 
-    UsersModule, AuthModule,
+    TypeOrmModule.forRoot(typeOrmConfig),
+    WinstonModule.forRoot(winstonConfig),
+    UsersModule,
+    AuthModule,
+    ProductsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggerInterceptor,
+    },
+  ],
 })
-export class AppModule {
-  
-}
+export class AppModule {}
