@@ -15,13 +15,19 @@ import {
   
     @Column()
     name: string;
+
+    @Column()
+    urlImage: string;
+
+    @Column()
+    price: number;
   
     @Column()
     status: boolean;
   
     @Column()
-    price: number;
-  
+    type: string;
+
     @CreateDateColumn()
     createdAt: Date;
   
