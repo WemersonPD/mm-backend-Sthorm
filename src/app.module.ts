@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './configs/typeorm.config';
 import { ProductsModule } from './products/products.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -10,7 +12,9 @@ import { MulterModule } from '@nestjs/platform-express';
     ProductsModule,
     MulterModule.register({
       dest: './files'
-    })
+    }),
+    UsersModule,
+    AuthModule
   ],
   controllers: [],
   
