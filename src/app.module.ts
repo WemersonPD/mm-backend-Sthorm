@@ -1,3 +1,4 @@
+import { PaymentsModule } from './payments/payments.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './configs/typeorm.config';
@@ -14,7 +15,8 @@ import { AuthModule } from './auth/auth.module';
       dest: './files'
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    PaymentsModule,
   ],
   controllers: [],
   
