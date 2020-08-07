@@ -1,4 +1,4 @@
-import { EnumBrands } from 'cielo';
+
 export class CreatePaymentCieloCreditCardDto {
   customer: {
     name: string,
