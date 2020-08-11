@@ -23,6 +23,8 @@ export class CreatePaymentCieloCreditCardDto {
       cardNumber: string,
       holder: string,
       expirationDate: string,
+      securityCode: string,
+
     },
     installments: number,
     softDescriptor: string,
