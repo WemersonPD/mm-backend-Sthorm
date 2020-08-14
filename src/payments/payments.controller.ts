@@ -9,9 +9,13 @@ export class PaymentsController {
   
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   @Post('/creditCard')
-  async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto) {
-    const product = await this.paymentsService.paymentCreditCardCielo(paymentCreditcard);
-    return product
+  // async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto) {
+  //   const product = await this.paymentsService.paymentCreditCardCielo(paymentCreditcard);
+  //   return product
+  // }
+  async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto) { 
+    const payment = await this.paymentsService.savePayment(paymentCreditcard);
+    return payment;
   }
 
 }
