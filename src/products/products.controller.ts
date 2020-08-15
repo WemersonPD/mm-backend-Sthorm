@@ -1,3 +1,4 @@
+import { Products } from './product.entity';
 
 import {
   Body,
@@ -74,5 +75,10 @@ export class ProductsController {
       products,
       message: 'Todos os produtos'
     }
+  }
+
+  @Get('/getProduct/:name')
+  async getProductByName(@Param('name') name: string): Promise<Products[]> {
+    return this.productService.getProductByName(name);
   }
 }

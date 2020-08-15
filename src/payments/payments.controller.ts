@@ -10,13 +10,13 @@ export class PaymentsController {
   
   @Post('creditCard')
   async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto): Promise<Payment> { 
-    const payment = await this.paymentsService.savePayment(paymentCreditcard);
+    const payment = await this.paymentsService.createPayment(paymentCreditcard);
     return payment;
   }
 
   @Get('order-history/:ownerEmail')
   async getHistory(@Param('ownerEmail') ownerEmail: string): Promise<Payment[]> {
-    const orderHistorysByOwnerEmail = await this.paymentsService.findOrderHistoryByOwnerEmail(ownerEmail);
+    const orderHistorysByOwnerEmail = await this.paymentsService.gateOrderHistoryByOwnerEmail(ownerEmail);
     return orderHistorysByOwnerEmail;
   }
 }

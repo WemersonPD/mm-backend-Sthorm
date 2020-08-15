@@ -22,5 +22,7 @@ export class ProductsService {
     return products;
   }
 
-  
+  async getProductByName(name: string): Promise<Products[]> {
+    return this.productRepository.find({where: {name}})
+  }
 }

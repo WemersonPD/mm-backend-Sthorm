@@ -21,10 +21,10 @@ export class PaymentsService {
   constructor(
     private paymenteRepository: PaymentRepository,
   ) { }
-  async savePayment(createPaymentCieloCreditCardDto: CreatePaymentCieloCreditCardDto): Promise<Payment> {
+  async createPayment(createPaymentCieloCreditCardDto: CreatePaymentCieloCreditCardDto): Promise<Payment> {
     return this.paymenteRepository.savePayment(createPaymentCieloCreditCardDto);
   }
-  async findOrderHistoryByOwnerEmail(ownerEmail: string): Promise<Payment[]> {
+  async gateOrderHistoryByOwnerEmail(ownerEmail: string): Promise<Payment[]> {
     return await this.paymenteRepository.find({where: {ownerEmail}})
   }
 }
