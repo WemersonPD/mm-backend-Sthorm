@@ -57,9 +57,8 @@ export class PaymentRepository extends Repository<Payment> {
     try {
       await paymentEntity.save();
       return paymentEntity;
-    } catch (error) {
-      throw new InternalServerErrorException('Erro no processamento do pagamento', error);
-
+    } catch {
+      throw new InternalServerErrorException('Erro no processamento do pagamento');
     }
   }
 }

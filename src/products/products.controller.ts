@@ -67,7 +67,7 @@ export class ProductsController {
     };
   }
 
-  @Get('getProducts')
+  @Get('/getProducts')
   async getAllProducts(): Promise<ReturnProductsDto> {
     const products = await this.productService.getAllProducts();
     return {

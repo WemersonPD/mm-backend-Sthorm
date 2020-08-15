@@ -24,4 +24,7 @@ export class PaymentsService {
   async savePayment(createPaymentCieloCreditCardDto: CreatePaymentCieloCreditCardDto): Promise<Payment> {
     return this.paymenteRepository.savePayment(createPaymentCieloCreditCardDto);
   }
+  async findOrderHistoryByOwnerEmail(ownerEmail: string): Promise<Payment[]> {
+    return await this.paymenteRepository.find({where: {ownerEmail}})
+  }
 }
