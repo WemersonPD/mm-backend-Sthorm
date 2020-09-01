@@ -1,5 +1,7 @@
-
 export class CreatePaymentCieloCreditCardDto {
+  productName: string;
+  urlImage: string;
+  ownerEmail: string;
   customer: {
     name: string,
     identity: string,
@@ -23,6 +25,8 @@ export class CreatePaymentCieloCreditCardDto {
       cardNumber: string,
       holder: string,
       expirationDate: string,
+      securityCode: string,
+
     },
     installments: number,
     softDescriptor: string,

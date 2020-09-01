@@ -1,5 +1,6 @@
+import { Payment } from './payment.entity';
 import { CreatePaymentCieloCreditCardDto } from './dto/create-payment-cielo-credit-card.dto';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 @Controller('payment')
 export class PaymentsController {
@@ -7,11 +8,15 @@ export class PaymentsController {
     private paymentsService: PaymentsService
   ) { }
   
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   @Post('/creditCard')
-  async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto) {
-    const product = await this.paymentsService.paymentCreditCardCielo(paymentCreditcard);
-    return product
+  async purchaseCreditCard(@Body() paymentCreditcard: CreatePaymentCieloCreditCardDto): Promise<Payment> { 
+    const payment = await this.paymentsService.createPayment(paymentCreditcard);
+    return payment;
   }
 
+  @Get('/:ownerEmail')
+  async getHistory(@Param('ownerEmail') ownerEmail: string): Promise<Payment[]> {
+    const orderHistorysByOwnerEmail = await this.paymentsService.gateOrderHistoryByOwnerEmail(ownerEmail);
+    return orderHistorysByOwnerEmail;
+  }
 }

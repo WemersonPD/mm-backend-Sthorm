@@ -1,3 +1,4 @@
+import { Products } from './product.entity';
 
 import {
   Body,
@@ -55,7 +56,7 @@ export class ProductsController {
 
   
 
-  @Post('/createProduct')
+  @Post('/')
   async createProduct(
     @Body(ValidationPipe) createProductDto: CreateProductDto,
   ): Promise<ReturnProductDto> {
@@ -67,12 +68,17 @@ export class ProductsController {
     };
   }
 
-  @Get('getProducts')
+  @Get('/')
   async getAllProducts(): Promise<ReturnProductsDto> {
     const products = await this.productService.getAllProducts();
     return {
       products,
       message: 'Todos os produtos'
     }
+  }
+
+  @Get('/:name')
+  async getProductByName(@Param('name') name: string): Promise<Products[]> {
+    return this.productService.getProductByName(name);
   }
 }

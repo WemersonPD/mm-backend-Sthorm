@@ -13,7 +13,7 @@ export class ProductsService {
   ){}
 
   async createProduct(createProductDto: CreateProductDto): Promise<Products> {
-    return this.productRepository.createProduct(createProductDto)
+    return this.productRepository.createProduct(createProductDto);
   }
 
   async getAllProducts(): Promise<Products[]> {
@@ -22,5 +22,7 @@ export class ProductsService {
     return products;
   }
 
-  
+  async getProductByName(name: string): Promise<Products[]> {
+    return this.productRepository.find({where: {name}})
+  }
 }
