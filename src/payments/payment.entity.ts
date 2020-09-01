@@ -8,10 +8,16 @@ export class Payment extends BaseEntity {
   productName: string;
 
   @Column()
-  ownerEmail: string;
+  urlImage: string;
 
   @Column()
-  paymentUrl: string;
+  price: number;
+
+  @Column()
+  returnPaymentMessage: string;
+
+  @Column()
+  ownerEmail: string;
 
   @CreateDateColumn()
   createdAt: Date;

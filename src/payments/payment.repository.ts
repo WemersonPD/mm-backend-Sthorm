@@ -15,7 +15,7 @@ export class PaymentRepository extends Repository<Payment> {
 
   private cielo = new Cielo(this.cieloParams);
   async savePayment(createPaymentCieloCreditCardDto: CreatePaymentCieloCreditCardDto): Promise<Payment> {
-    const { customer, merchantOrderId, payment, productName, ownerEmail} = createPaymentCieloCreditCardDto
+    const { customer, merchantOrderId, payment, productName, urlImage, ownerEmail} = createPaymentCieloCreditCardDto
     const paymentEntity = this.create();
     const paymentParams: TransactionCreditCardRequestModel = {
       customer: {
@@ -50,13 +50,21 @@ export class PaymentRepository extends Repository<Payment> {
       },
     };
     const finishPayment = await this.cielo.creditCard.transaction(paymentParams);
-    const paymentLinkCapture = finishPayment.payment.links[0]['href'];
-    paymentEntity.ownerEmail = ownerEmail;
-    paymentEntity.paymentUrl = paymentLinkCapture;
+    // const paymentLinkCapture = finishPayment.payment.links[0]['href'];
+    // paymentEntity.ownerEmail = ownerEmail;
+    // paymentEntity.paymentUrl = paymentLinkCapture;
+
+    paymentEntity.price = finishPayment.payment.amount;
     paymentEntity.productName = productName;
+    paymentEntity.urlImage = urlImage;
+    paymentEntity.ownerEmail = ownerEmail;
     try {
+      if (finishPayment.payment.returnMessage === 'Operation Successful') {
+        paymentEntity.returnPaymentMessage = finishPayment.payment.returnMessage;  
+      }
       await paymentEntity.save();
       return paymentEntity;
+
     } catch {
       throw new InternalServerErrorException('Erro no processamento do pagamento');
     }

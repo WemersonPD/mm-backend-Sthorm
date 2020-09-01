@@ -1,5 +1,6 @@
 export class CreatePaymentCieloCreditCardDto {
   productName: string;
+  urlImage: string;
   ownerEmail: string;
   customer: {
     name: string,

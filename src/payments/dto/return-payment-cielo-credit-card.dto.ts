@@ -1,8 +1,13 @@
-import { Products } from 'src/products/product.entity';
-import { TransactionCreditCardResponseModel } from "cielo";
+// import { Products } from 'src/products/product.entity';
+// import { TransactionCreditCardResponseModel } from "cielo";
 
 export class ReturnPaymentCieloCreditCardDto {
-  payment: TransactionCreditCardResponseModel;
-  product: Products;
-  owner: string;
+  // payment: TransactionCreditCardResponseModel;
+  id: string;
+  productName: string;
+  ownerEmail: string;
+  urlImg: string;
+  price: number;
+  createdAt: Date;
+  updateAt: Date;
 }

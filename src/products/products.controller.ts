@@ -56,7 +56,7 @@ export class ProductsController {
 
   
 
-  @Post('/createProduct')
+  @Post('/')
   async createProduct(
     @Body(ValidationPipe) createProductDto: CreateProductDto,
   ): Promise<ReturnProductDto> {
@@ -68,7 +68,7 @@ export class ProductsController {
     };
   }
 
-  @Get('/getProducts')
+  @Get('/')
   async getAllProducts(): Promise<ReturnProductsDto> {
     const products = await this.productService.getAllProducts();
     return {
@@ -77,7 +77,7 @@ export class ProductsController {
     }
   }
 
-  @Get('/getProduct/:name')
+  @Get('/:name')
   async getProductByName(@Param('name') name: string): Promise<Products[]> {
     return this.productService.getProductByName(name);
   }
